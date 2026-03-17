@@ -19,7 +19,12 @@
 		<PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
 		<Description>Zorro Theme (Visual FoxPro compatibility theme) for CODE Framework. For more information, see https://codeframework.io</Description>
 		<Copyright>Markus Egger Inc.</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
 	<ItemGroup>
 		<None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
