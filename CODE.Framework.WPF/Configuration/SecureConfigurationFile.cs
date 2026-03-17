@@ -62,7 +62,7 @@ namespace CODE.Framework.Wpf.Configuration
 
             var encryptedFileContents = StringHelper.FromFile(fileName);
             if (EncryptionKey == null) throw new Exception("SecureConfigurationFile.EncryptionKey must be set!");
-            var fileContents = SecurityHelper.DecryptString(encryptedFileContents, EncryptionKey);
+            var fileContents = SecurityHelper.DecryptStringAes(encryptedFileContents, EncryptionKey);
             var xml = new XmlDocument();
             xml.LoadXml(fileContents);
 
@@ -125,7 +125,7 @@ namespace CODE.Framework.Wpf.Configuration
             {
                 xml.Save(stream);
                 if (EncryptionKey == null) throw new Exception("SecureConfigurationFile.EncryptionKey must be set!");
-                var encryptedfileContents = SecurityHelper.EncryptString(StreamHelper.ToString(stream), EncryptionKey);
+                var encryptedfileContents = SecurityHelper.EncryptStringAes(StreamHelper.ToString(stream), EncryptionKey);
                 StringHelper.ToFile(encryptedfileContents, fileName);
             }
         }

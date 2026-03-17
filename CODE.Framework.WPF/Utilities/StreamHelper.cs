@@ -23,7 +23,7 @@ namespace CODE.Framework.Wpf.Utilities
             {
                 var length = (int)stream.Length;
                 var buffer = new byte[length];
-                stream.Read(buffer, 0, length);
+                stream.ReadExactly(buffer, 0, length);
                 retVal = Encoding.UTF8.GetString(buffer);
             }
             return retVal;
@@ -44,7 +44,7 @@ namespace CODE.Framework.Wpf.Utilities
             {
                 var length = (int)stream.Length;
                 retVal = new byte[length];
-                stream.Read(retVal, 0, length);
+                stream.ReadExactly(retVal, 0, length);
             }
             return retVal;
         }
@@ -149,7 +149,7 @@ namespace CODE.Framework.Wpf.Utilities
             var fileStream = File.OpenRead(fileName);
             var fileLength = (int)fileStream.Length;
             var fileBytes = new byte[fileLength];
-            fileStream.Read(fileBytes, 0, fileLength);
+            fileStream.ReadExactly(fileBytes, 0, fileLength);
             fileStream.Close();
             fileStream.Dispose();
             return FromArray(fileBytes);

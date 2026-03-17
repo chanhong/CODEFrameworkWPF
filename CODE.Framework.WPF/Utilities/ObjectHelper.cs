@@ -560,7 +560,6 @@ namespace CODE.Framework.Wpf.Utilities
     /// <summary>
     /// Exception thrown whenever object instantiation fails.
     /// </summary>
-    [Serializable]
     public class ObjectInstantiationException : Exception
     {
         /// <summary>
@@ -580,12 +579,5 @@ namespace CODE.Framework.Wpf.Utilities
         /// <param name="message">Exception message</param>
         /// <param name="innerException">Inner exception</param>
         public ObjectInstantiationException(string message, Exception innerException) : base(message, innerException) { }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="info">Serialization info</param>
-        /// <param name="context">Streaming context</param>
-        protected ObjectInstantiationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }
