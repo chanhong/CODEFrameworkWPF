@@ -50,7 +50,7 @@
             //    Number1 = "100"
             //});
 
-            Actions.Add(new SwitchThemeViewAction("Windows 95", "Battleship (Win95)", category: "View", categoryAccessKey: 'V', accessKey: 'W') { GroupTitle = "View" });
+            Actions.Add(new SwitchThemeViewAction("Battleship", "Battleship (Win95)", category: "View", categoryAccessKey: 'V', accessKey: 'W') { GroupTitle = "View" });
             Actions.Add(new SwitchThemeViewAction("Geek", "Geek (Visual Studio)", category: "View", categoryAccessKey: 'V', accessKey: 'G') { GroupTitle = "View" });
             Actions.Add(new SwitchThemeViewAction("Metro", "Metro (Win8)", category: "View", categoryAccessKey: 'V', accessKey: 'M') { GroupTitle = "View" });
             Actions.Add(new SwitchThemeViewAction("Universe", "Universe (UWP)", category: "View", categoryAccessKey: 'V', accessKey: 'U') { GroupTitle = "View" });
