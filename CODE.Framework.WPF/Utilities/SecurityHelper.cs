@@ -149,28 +149,33 @@ namespace CODE.Framework.Wpf.Utilities
         public static string EncryptStringAes(string inputString, byte[] encryptionKey) =>
             Convert.ToBase64String(EncryptBytesAes(Encoding.UTF8.GetBytes(inputString), encryptionKey));
 
+        private static bool LooksLikeAesCbc(byte[] data) =>
+            data.Length >= 32 && (data.Length - 16) % 16 == 0;
+
         /// <summary>
-        /// Decrypts a byte array that was encrypted with <see cref="EncryptBytesAes"/>.
-        /// Expects the 16-byte IV to be prepended to the ciphertext.
+        /// Decrypts a byte array using AES-CBC, falling back to TripleDES-ECB for legacy ciphertext.
+        /// AES-CBC is identified by a prepended 16-byte IV; anything else is assumed to be legacy TripleDES-ECB.
         /// </summary>
-        /// <param name="input">The byte array containing the prepended IV followed by the ciphertext.</param>
+        /// <param name="input">The ciphertext bytes to decrypt.</param>
         /// <param name="encryptionKey">
-        /// The AES encryption key. Must match the key used during encryption.
+        /// The decryption key. For AES must be 16, 24, or 32 bytes; for legacy TripleDES must be 16 or 24 bytes.
         /// </param>
-        /// <returns>The decrypted plaintext byte array.</returns>
+        /// <returns>The decrypted plaintext as a byte array.</returns>
         public static byte[] DecryptBytesAes(byte[] input, byte[] encryptionKey)
         {
-            using var aes = Aes.Create();
-            aes.Key = encryptionKey;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
+            if (LooksLikeAesCbc(input))
+            {
+                using var aes = Aes.Create();
+                aes.Key = encryptionKey;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.IV = input[..16];
+                return aes.CreateDecryptor().TransformFinalBlock(input, 16, input.Length - 16);
+            }
 
-            var iv = input[..16];
-            var ciphertext = input[16..];
-
-            aes.IV = iv;
-            var transform = aes.CreateDecryptor();
-            return transform.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
+#pragma warning disable CS0618  // Legacy TripleDES-ECB fallback for data encrypted before AES migration
+            return DecryptBytes(input, encryptionKey);
+#pragma warning restore CS0618
         }
 
         /// <summary>
