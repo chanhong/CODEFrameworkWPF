@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <LangVersion>preview</LangVersion>
     <AssemblyVersion>5.1.0.0</AssemblyVersion>
     <FileVersion>5.1.0.0</FileVersion>
     <Version>5.1.0</Version>
@@ -19,7 +18,12 @@
 		<PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
 		<Description>Vapor Theme (inspired by Valve's Steam UI) for CODE Framework. For more information, see https://codeframework.io</Description>
 		<Copyright>Markus Egger Inc.</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
 	<ItemGroup>
 		<None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />
