@@ -264,6 +264,9 @@ namespace CODE.Framework.Wpf.Layout
 
             dc.DrawLine(linePen, new Point(0, 29.5), new Point(tabItemsPanel.ActualWidth, 29.5));
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(tabItemsPanel).PixelsPerDip;
+
             var counter = -1;
             var left = 5d;
             foreach (var element in tabItemsPanel.Children.OfType<UIElement>())
@@ -278,7 +281,7 @@ namespace CODE.Framework.Wpf.Layout
 
                 if (counter == tabItemsPanel.SelectedPage)
                 {
-                    var ft = new FormattedText(_pageHeaders[counter], CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, boldType, 11d, Brushes.Black);
+                    var ft = new FormattedText(_pageHeaders[counter], CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, boldType, 11d, Brushes.Black, pixelsPerDip);
                     var textWidth = ft.Width;
                     var headerRect = new Rect(left, 0, textWidth + 20, 30);
                     _headerRectangles.Add(headerRect);
@@ -291,7 +294,7 @@ namespace CODE.Framework.Wpf.Layout
                 }
                 else
                 {
-                    var ft = new FormattedText(_pageHeaders[counter], CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, regularType, 11d, Brushes.Black);
+                    var ft = new FormattedText(_pageHeaders[counter], CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, regularType, 11d, Brushes.Black, pixelsPerDip);
                     var textWidth = ft.Width;
                     var headerRect = new Rect(left, 0, textWidth + 20, 30);
                     _headerRectangles.Add(headerRect);

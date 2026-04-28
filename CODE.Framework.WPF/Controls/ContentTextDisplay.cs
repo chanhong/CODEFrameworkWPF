@@ -218,7 +218,7 @@ namespace CODE.Framework.Wpf.Controls
         /// <param name="maxWidth">The maximum width.</param>
         /// <param name="maxLineCount">The maximum line count.</param>
         /// <returns>FormattedText.</returns>
-        private FormattedText GetFormattedText(string text, double maxWidth, int maxLineCount) => new FormattedText(text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Foreground) { MaxLineCount = maxLineCount, MaxTextWidth = maxWidth };
+        private FormattedText GetFormattedText(string text, double maxWidth, int maxLineCount) => new FormattedText(text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Foreground, VisualTreeHelper.GetDpi(this).PixelsPerDip) { MaxLineCount = maxLineCount, MaxTextWidth = maxWidth };
 
         /// <summary>
         /// Gets the display text.

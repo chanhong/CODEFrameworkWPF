@@ -300,6 +300,9 @@ namespace CODE.Framework.Wpf.Layout
             var children = GetCurrentChildren();
             if (children.Count < 1) return;
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             _hitZones.Clear();
             var headerHeight = GetHeaderHeight() + 5;
             var currentLeft = HorizontalHeaderRenderingOffset;
@@ -309,7 +312,7 @@ namespace CODE.Framework.Wpf.Layout
             {
                 var title = SimpleView.GetTitle(child.Child);
                 if (string.IsNullOrEmpty(title)) title = "Item";
-                var ft = isFirst ? new FormattedText(title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(HeaderFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), HeaderFontSize, SelectedHeaderForeground) : new FormattedText(title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(HeaderFontFamily, FontStyles.Normal, FontWeights.Light, FontStretches.Normal), HeaderFontSize, UnselectedHeaderForeground);
+                var ft = isFirst ? new FormattedText(title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(HeaderFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), HeaderFontSize, SelectedHeaderForeground, pixelsPerDip) : new FormattedText(title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(HeaderFontFamily, FontStyles.Normal, FontWeights.Light, FontStretches.Normal), HeaderFontSize, UnselectedHeaderForeground, pixelsPerDip);
                 dc.DrawText(ft, new Point(currentLeft, 0d));
 
                 if (index > Children.Count - 1) index = 0; // We wrap back to item 0 when we shoot out the back
@@ -354,7 +357,9 @@ namespace CODE.Framework.Wpf.Layout
         {
             if (_headerHeight < 0)
             {
-                var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(HeaderFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), HeaderFontSize, Brushes.Black);
+                // Retrieve current DPI.
+                var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+                var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(HeaderFontFamily, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), HeaderFontSize, Brushes.Black, pixelsPerDip);
                 _headerHeight = ft.Height;
             }
             return _headerHeight;

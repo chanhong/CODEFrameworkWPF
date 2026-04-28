@@ -765,8 +765,10 @@ namespace CODE.Framework.Wpf.Layout
             {
                 if (_mainWellHeaderHeight < .1d)
                 {
+                    // Retrieve current DPI.
+                    var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                     var font = new Typeface(MainWellHeaderFontFamily, MainWellHeaderFontStyle, MainWellHeaderFontWeight, FontStretches.Normal);
-                    var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, MainWellHeaderFontSize, MainWellSelectedHeaderForegroundBrush)
+                    var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, MainWellHeaderFontSize, MainWellSelectedHeaderForegroundBrush, pixelsPerDip)
                     {
                         TextAlignment = TextAlignment.Left,
                         Trimming = TextTrimming.CharacterEllipsis,
@@ -787,8 +789,10 @@ namespace CODE.Framework.Wpf.Layout
             {
                 if (_dockWellHeaderHeight < .1d)
                 {
+                    // Retrieve current DPI.
+                    var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                     var font = new Typeface(DockWellHeaderFontFamily, DockWellHeaderFontStyle, DockWellHeaderFontWeight, FontStretches.Normal);
-                    var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, DockWellHeaderFontSize, DockWellHeaderForegroundBrush)
+                    var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, DockWellHeaderFontSize, DockWellHeaderForegroundBrush, pixelsPerDip)
                     {
                         TextAlignment = TextAlignment.Left,
                         Trimming = TextTrimming.CharacterEllipsis,
@@ -809,8 +813,10 @@ namespace CODE.Framework.Wpf.Layout
             {
                 if (_dockWellFooterHeight < .1d)
                 {
+                    // Retrieve current DPI.
+                    var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                     var font = new Typeface(DockWellFooterFontFamily, DockWellFooterFontStyle, DockWellFooterFontWeight, FontStretches.Normal);
-                    var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, DockWellFooterFontSize, DockWellFooterForegroundBrush)
+                    var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, DockWellFooterFontSize, DockWellFooterForegroundBrush, pixelsPerDip)
                     {
                         TextAlignment = TextAlignment.Left,
                         Trimming = TextTrimming.CharacterEllipsis,
@@ -1082,6 +1088,9 @@ namespace CODE.Framework.Wpf.Layout
 
             if (areaRect.Width < .1d || areaRect.Height < .1d) return;
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             var footerHeight = showTabs ? DockWellFooterHeight : 0d;
 
             var headerFont = new Typeface(DockWellHeaderFontFamily, DockWellHeaderFontStyle, DockWellHeaderFontWeight, FontStretches.Normal);
@@ -1097,7 +1106,7 @@ namespace CODE.Framework.Wpf.Layout
             // Header
             if (selectedIndex > -1 && elements.Count > selectedIndex)
             {
-                var ft = new FormattedText(elements[selectedIndex].Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, headerFont, DockWellHeaderFontSize, DockWellHeaderForegroundBrush)
+                var ft = new FormattedText(elements[selectedIndex].Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, headerFont, DockWellHeaderFontSize, DockWellHeaderForegroundBrush, pixelsPerDip)
                 {
                     TextAlignment = TextAlignment.Left,
                     Trimming = TextTrimming.CharacterEllipsis,
@@ -1117,7 +1126,7 @@ namespace CODE.Framework.Wpf.Layout
                 {
                     if (counter == selectedIndex)
                     {
-                        var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, footerFont, DockWellFooterFontSize, DockWellSelectedFooterForegroundBrush)
+                        var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, footerFont, DockWellFooterFontSize, DockWellSelectedFooterForegroundBrush, pixelsPerDip)
                         {
                             TextAlignment = TextAlignment.Left,
                             Trimming = TextTrimming.CharacterEllipsis,
@@ -1139,7 +1148,7 @@ namespace CODE.Framework.Wpf.Layout
                     }
                     else
                     {
-                        var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, footerFont, DockWellFooterFontSize, DockWellFooterForegroundBrush)
+                        var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, footerFont, DockWellFooterFontSize, DockWellFooterForegroundBrush, pixelsPerDip)
                         {
                             TextAlignment = TextAlignment.Left,
                             Trimming = TextTrimming.CharacterEllipsis,
@@ -1193,6 +1202,9 @@ namespace CODE.Framework.Wpf.Layout
             var areaRect = GetMainWellRect();
             if (areaRect.Width < .1d || areaRect.Height < .1d) return;
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             var headerBackgroundBrush = MainWellHeaderBackgroundBrush;
             var font = new Typeface(MainWellHeaderFontFamily, MainWellHeaderFontStyle, MainWellHeaderFontWeight, FontStretches.Normal);
 
@@ -1206,7 +1218,7 @@ namespace CODE.Framework.Wpf.Layout
             {
                 if (counter == MainSelectedIndex)
                 {
-                    var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, MainWellHeaderFontSize, MainWellSelectedHeaderForegroundBrush)
+                    var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, MainWellHeaderFontSize, MainWellSelectedHeaderForegroundBrush, pixelsPerDip)
                     {
                         TextAlignment = TextAlignment.Left,
                         Trimming = TextTrimming.CharacterEllipsis,
@@ -1219,7 +1231,7 @@ namespace CODE.Framework.Wpf.Layout
                 }
                 else
                 {
-                    var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, MainWellHeaderFontSize, MainWellHeaderForegroundBrush)
+                    var ft = new FormattedText(element.Title, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, font, MainWellHeaderFontSize, MainWellHeaderForegroundBrush, pixelsPerDip)
                     {
                         TextAlignment = TextAlignment.Left,
                         Trimming = TextTrimming.CharacterEllipsis,

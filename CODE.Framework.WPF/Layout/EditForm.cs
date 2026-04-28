@@ -794,6 +794,8 @@ namespace CODE.Framework.Wpf.Layout
             var spanColumnWidthRequired = 0d;
             var large = new Size(100000, 100000);
             var hasOpenBorder = false;
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
 
             foreach (var pair in column)
             {
@@ -820,7 +822,7 @@ namespace CODE.Framework.Wpf.Layout
                             // We are not using the group spacing after all, but are instead using the header spacing
                             columnSize.Height -= columnRenderInfo.GroupSpacingUsed;
 
-                        var text = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(GroupHeaderFontFamily, GroupHeaderFontStyle, GroupHeaderFontWeight, FontStretches.Normal), GroupHeaderFontSize, GroupHeaderForegroundBrush);
+                        var text = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(GroupHeaderFontFamily, GroupHeaderFontStyle, GroupHeaderFontWeight, FontStretches.Normal), GroupHeaderFontSize, GroupHeaderForegroundBrush, pixelsPerDip);
                         if (columnItemCount > 1)
                             columnSize.Height += columnRenderInfo.GroupHeaderTopSpacingUsed;
 
@@ -902,6 +904,8 @@ namespace CODE.Framework.Wpf.Layout
             double totalHeight = 0d, totalWidth = 0d, currentY = 0d, currentX = 0d, lastBorderX = 0d, lastBorderY = 0d, lastBorderHeight = 0d;
             var columnCount = 0;
             var hasOpenBorder = false;
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
 
             foreach (var column in _columnsUsed)
             {
@@ -955,7 +959,7 @@ namespace CODE.Framework.Wpf.Layout
                                 lastBorderHeight -= columnRenderInfo.GroupSpacingUsed;
                             }
 
-                            var text = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(GroupHeaderFontFamily, GroupHeaderFontStyle, GroupHeaderFontWeight, FontStretches.Normal), GroupHeaderFontSize, GroupHeaderForegroundBrush);
+                            var text = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(GroupHeaderFontFamily, GroupHeaderFontStyle, GroupHeaderFontWeight, FontStretches.Normal), GroupHeaderFontSize, GroupHeaderForegroundBrush, pixelsPerDip);
                             if (columnItemCount > 1)
                             {
                                 currentY += columnRenderInfo.GroupHeaderTopSpacingUsed;

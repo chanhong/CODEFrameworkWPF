@@ -286,6 +286,8 @@ namespace CODE.Framework.Wpf.Layout
                     }
                     if (foundTitle)
                     {
+                        // Retrieve current DPI.
+                        var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
                         var maxHeaderHeight = 0d;
                         foreach (var title in titles)
                         {
@@ -297,7 +299,8 @@ namespace CODE.Framework.Wpf.Layout
                                     FlowDirection.LeftToRight,
                                     new Typeface(HeaderFontFamily, HeaderFontStyle, HeaderFontWeight, FontStretches.Normal),
                                     HeaderFontSize,
-                                    HeaderForegroundBrush)
+                                    HeaderForegroundBrush,
+                                    pixelsPerDip)
                             };
                             maxHeaderHeight = Math.Max(header.FormattedText.Height, maxHeaderHeight);
                             _headers.Add(header);

@@ -130,6 +130,9 @@ namespace CODE.Framework.Wpf.Layout
         {
             if (Children.Count != 2) return base.MeasureOverride(availableSize); // Not much we can do until we have exactly two elements;
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             // First, we check whether we have any headers
             _headers.Clear();
             var header1 = GetCaption(Children[0]);
@@ -140,8 +143,8 @@ namespace CODE.Framework.Wpf.Layout
                 var maxHeaderHeight = 0d;
                 if (!string.IsNullOrEmpty(header1) || !string.IsNullOrEmpty(header2))
                 {
-                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) });
-                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) });
+                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) });
+                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) });
                     maxHeaderHeight = Math.Max(_headers[0].FormattedText.Height, _headers[1].FormattedText.Height);
                 }
 
@@ -162,7 +165,7 @@ namespace CODE.Framework.Wpf.Layout
 
                 if (!string.IsNullOrEmpty(header1))
                 {
-                    var text1 = new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) };
+                    var text1 = new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) };
                     _headers.Add(text1);
                     text1.RenderRect = GeometryHelper.NewRect(0d, 0d, availableSize.Width, text1.FormattedText.Height);
                     top += text1.FormattedText.Height + CaptionSpacing;
@@ -173,7 +176,7 @@ namespace CODE.Framework.Wpf.Layout
 
                 if (!string.IsNullOrEmpty(header2))
                 {
-                    var text2 = new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) };
+                    var text2 = new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) };
                     _headers.Add(text2);
                     text2.RenderRect = GeometryHelper.NewRect(0d, 0d, availableSize.Width, text2.FormattedText.Height);
                     top += text2.FormattedText.Height + CaptionSpacing;
@@ -197,6 +200,9 @@ namespace CODE.Framework.Wpf.Layout
         {
             if (Children.Count != 2) return base.ArrangeOverride(finalSize); // Not much we can do until we have exactly two elements;
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             // First, we check whether we have any headers
             _headers.Clear();
             var header1 = GetCaption(Children[0]);
@@ -207,8 +213,8 @@ namespace CODE.Framework.Wpf.Layout
                 var maxHeaderHeight = 0d;
                 if (!string.IsNullOrEmpty(header1) || !string.IsNullOrEmpty(header2))
                 {
-                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) });
-                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) });
+                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) });
+                    _headers.Add(new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) });
                     maxHeaderHeight = Math.Max(_headers[0].FormattedText.Height, _headers[1].FormattedText.Height);
                 }
 
@@ -234,7 +240,7 @@ namespace CODE.Framework.Wpf.Layout
 
                 if (!string.IsNullOrEmpty(header1))
                 {
-                    var text1 = new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) };
+                    var text1 = new AutoHeaderTextRenderInfo { Text = header1, FormattedText = new FormattedText(header1, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) };
                     _headers.Add(text1);
                     text1.RenderRect = GeometryHelper.NewRect(0d, 0d, finalSize.Width, text1.FormattedText.Height);
                     top += text1.FormattedText.Height + CaptionSpacing;
@@ -245,7 +251,7 @@ namespace CODE.Framework.Wpf.Layout
 
                 if (!string.IsNullOrEmpty(header2))
                 {
-                    var text2 = new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush) };
+                    var text2 = new AutoHeaderTextRenderInfo { Text = header2, FormattedText = new FormattedText(header2, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(CaptionFontFamily, CaptionFontStyle, CaptionFontWeight, FontStretches.Normal), CaptionFontSize, CaptionForegroundBrush, pixelsPerDip) };
                     _headers.Add(text2);
                     text2.RenderRect = GeometryHelper.NewRect(0d, 0d, finalSize.Width, text2.FormattedText.Height);
                     top += text2.FormattedText.Height + CaptionSpacing;
