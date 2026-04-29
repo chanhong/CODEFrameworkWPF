@@ -225,7 +225,7 @@ namespace CODE.Framework.Wpf.Controls
         /// <returns>double</returns>
         protected virtual double GetHeaderHeight()
         {
-            var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground);
+            var ft = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground, VisualTreeHelper.GetDpi(this).PixelsPerDip);
             return ft.Height + 7d;
         }
 
@@ -245,7 +245,9 @@ namespace CODE.Framework.Wpf.Controls
             var header = column.Header.ToString();
             if (!string.IsNullOrEmpty(header) && columnClientRect.Width > 8)
             {
-                var ft = new FormattedText(header, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground) { TextAlignment = column.HeaderTextAlignment, MaxLineCount = 1, MaxTextWidth = columnClientRect.Width - 6, Trimming = TextTrimming.CharacterEllipsis };
+                // Retrieve current DPI.
+                var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+                var ft = new FormattedText(header, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground, pixelsPerDip) { TextAlignment = column.HeaderTextAlignment, MaxLineCount = 1, MaxTextWidth = columnClientRect.Width - 6, Trimming = TextTrimming.CharacterEllipsis };
                 var topOffset = Math.Max((double)(int)(columnClientRect.Height - ft.Height) / 2, 0d);
                 dc.DrawText(ft, new Point(columnClientRect.X + 3, columnClientRect.Y + topOffset));
             }

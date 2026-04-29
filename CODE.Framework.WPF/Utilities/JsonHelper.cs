@@ -236,7 +236,7 @@ namespace CODE.Framework.Wpf.Utilities
             DaysToMonth366 = new[] { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
         }
 
-        public static TimeSpan GetUtcOffset(this DateTime d) => TimeZone.CurrentTimeZone.GetUtcOffset(d);
+        public static TimeSpan GetUtcOffset(this DateTime d) => TimeZoneInfo.Local.GetUtcOffset(d);
 
         public static XmlDateTimeSerializationMode ToSerializationMode(DateTimeKind kind)
         {

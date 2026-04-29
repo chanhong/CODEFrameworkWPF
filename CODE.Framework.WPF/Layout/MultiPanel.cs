@@ -921,13 +921,17 @@ namespace CODE.Framework.Wpf.Layout
         private FormattedText GetFormattedText(string text = "", Brush foreground = null)
         {
             if (foreground == null) foreground = Brushes.Black;
+
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             if (string.IsNullOrEmpty(text))
             {
                 if (_standardHeight == null)
-                    _standardHeight = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, foreground) { MaxLineCount = 1 };
+                    _standardHeight = new FormattedText("X", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, foreground, pixelsPerDip) { MaxLineCount = 1 };
                 return _standardHeight;
             }
-            return new FormattedText(text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, foreground) { MaxLineCount = 1 };
+            return new FormattedText(text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, foreground, pixelsPerDip) { MaxLineCount = 1 };
         }
 
         /// <summary>

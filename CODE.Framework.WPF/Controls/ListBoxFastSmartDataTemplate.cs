@@ -170,6 +170,10 @@ namespace CODE.Framework.Wpf.Controls
             var typeface = new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
             var currentLeft = HorizontalOffset * -1;
             var height = ActualHeight;
+
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             foreach (var column in Columns.Where(c => c.Visibility == Visibility.Visible))
             {
                 if (!string.IsNullOrEmpty(column.BindingPath) && DataContext != null)
@@ -190,7 +194,7 @@ namespace CODE.Framework.Wpf.Controls
                                 break;
                         }
 
-                        var ft = new FormattedText(currentValue, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, 12d, Brushes.Black)
+                        var ft = new FormattedText(currentValue, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, typeface, 12d, Brushes.Black, pixelsPerDip)
                         {
                             MaxTextWidth = column.Width.Value,
                             MaxTextHeight = height,

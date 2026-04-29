@@ -695,7 +695,9 @@ namespace CODE.Framework.Wpf.Layout
         /// <returns>Margin used (note: only top and left are respected)</returns>
         public Thickness GetHeaderPaddingUsedForRendering(string headerText)
         {
-            var ft = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground) { MaxLineCount = 1, MaxTextWidth = 100000 };
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+            var ft = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground, pixelsPerDip) { MaxLineCount = 1, MaxTextWidth = 100000 };
             return new Thickness(ItemIndentation, ft.Height + 5, 0d, 0d);
         }
 
@@ -711,8 +713,10 @@ namespace CODE.Framework.Wpf.Layout
             if (string.IsNullOrEmpty(internalText)) internalText = "X";
             var areaHeight = GetHeaderPaddingUsedForRendering(internalText).Top;
             if (areaHeight < 1 || actualWidth < 1) return;
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
             if (Background != null) dc.DrawRectangle(Background, null, GeometryHelper.NewRect(0, 2, actualWidth, areaHeight - 5));
-            var ft = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground) { MaxLineCount = 1, MaxTextWidth = Math.Max(actualWidth - ItemIndentation - 5, 0), Trimming = TextTrimming.CharacterEllipsis };
+            var ft = new FormattedText(headerText, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal), FontSize, Foreground, pixelsPerDip) { MaxLineCount = 1, MaxTextWidth = Math.Max(actualWidth - ItemIndentation - 5, 0), Trimming = TextTrimming.CharacterEllipsis };
 
             var heightWidth = ItemIndentation - 10;
             if (heightWidth > areaHeight - 2) heightWidth = areaHeight - 2;

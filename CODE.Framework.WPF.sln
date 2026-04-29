@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CODE.Framework.Wpf.Theme.Va
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CODE.Framework.Wpf.Theme.Wildcat", "CODE.Framework.Wpf.Theme.Wildcat\CODE.Framework.Wpf.Theme.Wildcat.csproj", "{3C6E444B-A1DB-462A-A347-652792EDF9D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CODE.Framework.Wpf.Theme.Workplace", "CODE.Framework.Wpf.Theme.Worlplace\CODE.Framework.Wpf.Theme.Workplace.csproj", "{DB152B55-DB19-4ACD-991D-CBA243F24835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CODE.Framework.Wpf.Theme.Workplace", "CODE.Framework.Wpf.Theme.Workplace\CODE.Framework.Wpf.Theme.Workplace.csproj", "{DB152B55-DB19-4ACD-991D-CBA243F24835}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CODE.Framework.Wpf.Documents", "CODE.Framework.Wpf.Documents\CODE.Framework.Wpf.Documents.csproj", "{80D8D26D-314C-42C4-A562-1C1886E85DF7}"
 EndProject

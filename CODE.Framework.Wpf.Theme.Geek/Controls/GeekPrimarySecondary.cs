@@ -235,10 +235,13 @@ namespace CODE.Framework.Wpf.Theme.Geek.Controls
                     break;
             }
 
+            // Retrieve current DPI.
+            var pixelsPerDip = VisualTreeHelper.GetDpi(this).PixelsPerDip;
+
             if (!string.IsNullOrEmpty(primaryTitle))
             {
-                var primaryFormattedText1 = new FormattedText(primaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(primaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), primaryTitleFontSize, primaryTitleBrush1) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
-                var primaryFormattedText2 = new FormattedText(primaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(primaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), primaryTitleFontSize, primaryTitleBrush2) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
+                var primaryFormattedText1 = new FormattedText(primaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(primaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), primaryTitleFontSize, primaryTitleBrush1, pixelsPerDip) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
+                var primaryFormattedText2 = new FormattedText(primaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(primaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), primaryTitleFontSize, primaryTitleBrush2, pixelsPerDip) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
 
                 var headerRect = new Rect(primaryRect.X + 2, primaryRect.Y + 2, primaryRect.Width - 4, primaryFormattedText1.Height + 4);
                 dc.DrawRectangle(primaryHeaderBackgroundBrush, null, headerRect);
@@ -256,8 +259,8 @@ namespace CODE.Framework.Wpf.Theme.Geek.Controls
 
             if (!string.IsNullOrEmpty(secondaryTitle))
             {
-                var secondaryFormattedText1 = new FormattedText(secondaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(secondaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), secondaryTitleFontSize, secondaryTitleBrush1) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
-                var secondaryFormattedText2 = new FormattedText(secondaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(secondaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), secondaryTitleFontSize, secondaryTitleBrush2) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
+                var secondaryFormattedText1 = new FormattedText(secondaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(secondaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), secondaryTitleFontSize, secondaryTitleBrush1, pixelsPerDip) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
+                var secondaryFormattedText2 = new FormattedText(secondaryTitle, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(secondaryTitleFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal), secondaryTitleFontSize, secondaryTitleBrush2, pixelsPerDip) { MaxTextWidth = secondaryRect.Width - 4, Trimming = TextTrimming.CharacterEllipsis };
 
                 var headerRect = new Rect(secondaryRect.X + 2, secondaryRect.Y + 2, secondaryRect.Width - 4, secondaryFormattedText1.Height + 4);
                 dc.DrawRectangle(secondaryHeaderBackgroundBrush, null, headerRect);

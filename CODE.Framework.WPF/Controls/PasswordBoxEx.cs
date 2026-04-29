@@ -11,45 +11,68 @@ namespace CODE.Framework.Wpf.Controls
     /// </remarks>
     public class PasswordBoxEx : Control
     {
-        /// <summary>Attached property to set the password</summary>
-        /// <remarks>This attached property can be attached to any UI Element to define row heights</remarks>
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.RegisterAttached("Value", typeof(string), typeof(PasswordBoxEx), new FrameworkPropertyMetadata("", ValuePropertyChanged) { BindsTwoWayByDefault = true, DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
-
-        private static bool _inPasswordChange;
-        private static bool _inExternalPasswordChange;
-
-        /// <summary>
-        ///     Handler for password value changes
-        /// </summary>
-        /// <param name="d">Source object</param>
-        /// <param name="e">Event arguments</param>
-        private static void ValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        static PasswordBoxEx()
         {
-            if (_inPasswordChange) return;
-            if (d is not PasswordBox passwordBox) return;
-
-            passwordBox.PasswordChanged += (s, e2) =>
-            {
-                if (_inExternalPasswordChange) return;
-                _inPasswordChange = true;
-                SetValue(d, passwordBox.Password);
-                _inPasswordChange = false;
-            };
-
-            _inExternalPasswordChange = true;
-            if (e.NewValue != null) passwordBox.Password = e.NewValue.ToString();
-            else passwordBox.Password = string.Empty;
-            _inExternalPasswordChange = false;
+            EventManager.RegisterClassHandler(
+                typeof(PasswordBox),
+                PasswordBox.LoadedEvent,
+                new RoutedEventHandler(PasswordBox_Loaded_ClassHandler));
         }
 
-        /// <summary>Gets the password value</summary>
-        /// <param name="obj">Object to set the password on</param>
-        /// <returns>Password value</returns>
-        public static string GetValue(DependencyObject obj) => (string)obj.GetValue(ValueProperty);
+        private static readonly DependencyProperty IsUpdatingProperty =
+            DependencyProperty.RegisterAttached("IsUpdating", typeof(bool), typeof(PasswordBoxEx),
+                new PropertyMetadata(false));
 
-        /// <summary>Password value</summary>
-        /// <param name="obj">Object to set the password value on</param>
-        /// <param name="value">Value to set</param>
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.RegisterAttached("Value", typeof(string), typeof(PasswordBoxEx),
+                new FrameworkPropertyMetadata(string.Empty, ValuePropertyChanged)
+                {
+                    BindsTwoWayByDefault = true,
+                    DefaultUpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                });
+
+        public static string GetValue(DependencyObject obj) => (string)obj.GetValue(ValueProperty);
         public static void SetValue(DependencyObject obj, string value) => obj.SetValue(ValueProperty, value);
+
+        private static bool GetIsUpdating(DependencyObject obj) => (bool)obj.GetValue(IsUpdatingProperty);
+        private static void SetIsUpdating(DependencyObject obj, bool value) => obj.SetValue(IsUpdatingProperty, value);
+
+        private static void PasswordBox_Loaded_ClassHandler(object sender, RoutedEventArgs e)
+        {
+            if (sender is not PasswordBox passwordBox) return;
+            if (BindingOperations.GetBindingExpression(passwordBox, ValueProperty) == null) return;
+            EnsurePasswordChangedHandlerAttached(passwordBox);
+        }
+
+        private static void ValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not PasswordBox passwordBox) return;
+
+            EnsurePasswordChangedHandlerAttached(passwordBox);
+
+            if (!GetIsUpdating(passwordBox))
+            {
+                SetIsUpdating(passwordBox, true);
+                passwordBox.Password = e.NewValue?.ToString() ?? string.Empty;
+                SetIsUpdating(passwordBox, false);
+            }
+        }
+
+        private static void EnsurePasswordChangedHandlerAttached(PasswordBox passwordBox)
+        {
+            // Always detach before attaching — guarantees exactly one registration
+            passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+            passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+        }
+
+        private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (sender is not PasswordBox passwordBox) return;
+            if (GetIsUpdating(passwordBox)) return;
+
+            SetIsUpdating(passwordBox, true);
+            SetValue(passwordBox, passwordBox.Password);
+            SetIsUpdating(passwordBox, false);
+        }
     }
 }
