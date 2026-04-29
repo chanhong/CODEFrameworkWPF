@@ -17,7 +17,7 @@ namespace CODE.Framework.Wpf.Theme.Workplace.Classes
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value.ToString().ToUpper();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value?.ToString().ToUpper();
 
         /// <summary>
         /// Converts a value.
