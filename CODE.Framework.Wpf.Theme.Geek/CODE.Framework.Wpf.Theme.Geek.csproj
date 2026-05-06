@@ -1,29 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <AssemblyVersion>5.1.0.0</AssemblyVersion>
-    <FileVersion>5.1.0.0</FileVersion>
-    <Version>5.1.0</Version>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Authors>Markus Egger Inc.</Authors>
-		<Company>Markus Egger Inc.</Company>
-		<Product>CODE Framework</Product>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<RepositoryUrl>https://github.com/CODEFramework</RepositoryUrl>
-		<RepositoryType>Git</RepositoryType>
-		<PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
-		<PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
-		<PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
 		<Description>Geek Theme (Visual Studio inspired) for CODE Framework. For more information, see https://codeframework.io</Description>
-		<Copyright>Markus Egger Inc.</Copyright>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\README.md" Pack="true" PackagePath="\"/>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="CODEFrameworkLogoSmall.png" Pack="true" PackagePath="\" />

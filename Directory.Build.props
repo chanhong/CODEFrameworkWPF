@@ -1,0 +1,21 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+        <FileVersion>6.0.0.0</FileVersion>
+        <Version>6.0.0</Version>
+        <Authors>Markus Egger Inc.</Authors>
+        <Company>Markus Egger Inc.</Company>
+        <Product>CODE Framework</Product>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/CODEFramework</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageIconUrl>http://www.codemag.com/Images/Logos/CodeFramework_Small.png</PackageIconUrl>
+        <PackageIcon>CODEFrameworkLogoSmall.png</PackageIcon>
+        <PackageProjectUrl>https://codeframework.io</PackageProjectUrl>
+        <Copyright>Markus Egger Inc.</Copyright>
+	    <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+</Project>
